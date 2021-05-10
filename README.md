@@ -5,3 +5,5 @@ App takes word from card's field and looks for it in Google.Pictures. Then inser
 
 To use, install .ankiaddon file, then open the Card Browser, then choose a cardboard, then choose cards, then click File, then Add Pictures To Cards, then define fields, then tap Ok, then wait, then learn your cards every day. 
 
+If you want to contact me, write to
+my.artem42@gmail.com
