@@ -76,8 +76,6 @@ def addPictures(browser):
         r.raise_for_status()
 
         results = []
-        # Парсим полученный HTML с помощью BeautifulSoup
-        soup = BeautifulSoup(r.text, "html.parser")
         # Формируем регулярное выражения для поиска картинок
         regex = re.escape(r'AF_initDataCallback({') + r'[^<]*?data:[^<]*?(\[[^<]+\])'
         for txt in re.findall(regex, r.text):
@@ -119,7 +117,7 @@ def addPictures(browser):
         # Говорим Анки записать картинку (data) в папку collection.media с именем fname
         # Если fname уже существует и отличается, то Анки к имени файла добавит хеш и запишет с новым именем
         fname = mw.col.media.writeData(fname, data)
-        # Форматируем имя файла в виде <img> тега HTML
+        # Форматируем имя файла в виде <img> тега HTML. Размещаем картинку по центру, чтобы она не была растянута на весь экран (максимум 90%), минимальная ширина 50% от экрана
         filename = f'<p style="text-align: center;"><img src="{fname}" max-height="90%" max-width="90%" min-width="50%"></p>'
         # И добавляем в поле dstField
         note[dstField] += filename
@@ -144,5 +142,4 @@ def setupMenu(browser):
     a.triggered.connect(lambda _, b=browser: addPictures(b))
 
 # Используем Legacy Hook, чтобы добавить новое действие в меню Edit браузера
-# https://addon-docs.ankiweb.net/#/hooks-and-filters
 addHook("browser.setupMenus", setupMenu)
